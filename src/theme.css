@@ -1,0 +1,302 @@
+/* ============================================================
+   CensusSetu / census-ai-enumerator — Civic-Tech Design Theme
+   Clean, trustworthy, government-portal aesthetic.
+   No glassmorphism, no heavy gradients, minimal motion.
+   ============================================================ */
+
+:root {
+    /* ---------- Brand Colors ---------- */
+    --color-primary: #1e3a8a;
+    /* deep trust blue (matches favicon/theme-color) */
+    --color-primary-light: #3b5bcc;
+    --color-primary-dark: #14276b;
+    --color-primary-bg: #eef2ff;
+    /* light tint for backgrounds/badges */
+
+    --color-secondary: #0f766e;
+    /* teal accent — used sparingly for "verified/safe" */
+    --color-secondary-bg: #ecfdf5;
+
+    --color-accent: #b45309;
+    /* amber — used for "needs verification / caution" */
+    --color-accent-bg: #fffbeb;
+
+    --color-danger: #b91c1c;
+    /* red — "suspicious / do not share" */
+    --color-danger-bg: #fef2f2;
+
+    /* ---------- Neutrals ---------- */
+    --color-text-primary: #111827;
+    --color-text-secondary: #4b5563;
+    --color-text-muted: #6b7280;
+    --color-border: #e5e7eb;
+    --color-border-strong: #d1d5db;
+    --color-surface: #ffffff;
+    --color-surface-alt: #f9fafb;
+    --color-bg: #f5f7fa;
+
+    /* ---------- Status Badges (SourceBadge component) ---------- */
+    --status-verified-bg: #ecfdf5;
+    --status-verified-text: #047857;
+    --status-demo-bg: #fffbeb;
+    --status-demo-text: #b45309;
+    --status-needs-verification-bg: #fef3c7;
+    --status-needs-verification-text: #92400e;
+    --status-not-available-bg: #f3f4f6;
+    --status-not-available-text: #6b7280;
+
+    /* ---------- Typography ---------- */
+    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-display: 'Outfit', 'Inter', sans-serif;
+    --font-devanagari: 'Noto Sans Devanagari', 'Inter', sans-serif;
+
+    --fs-xs: 0.75rem;
+    --fs-sm: 0.875rem;
+    --fs-base: 1rem;
+    --fs-lg: 1.125rem;
+    --fs-xl: 1.25rem;
+    --fs-2xl: 1.5rem;
+    --fs-3xl: 1.875rem;
+    --fs-4xl: 2.25rem;
+
+    --fw-normal: 400;
+    --fw-medium: 500;
+    --fw-semibold: 600;
+    --fw-bold: 700;
+    --fw-extrabold: 800;
+
+    --lh-tight: 1.25;
+    --lh-normal: 1.5;
+    --lh-relaxed: 1.75;
+
+    /* ---------- Spacing scale ---------- */
+    --space-1: 0.25rem;
+    --space-2: 0.5rem;
+    --space-3: 0.75rem;
+    --space-4: 1rem;
+    --space-5: 1.25rem;
+    --space-6: 1.5rem;
+    --space-8: 2rem;
+    --space-10: 2.5rem;
+    --space-12: 3rem;
+    --space-16: 4rem;
+
+    /* ---------- Radius ---------- */
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 14px;
+    --radius-full: 9999px;
+
+    /* ---------- Shadows (subtle only — no heavy glassmorphism) ---------- */
+    --shadow-sm: 0 1px 2px rgba(16, 24, 40, 0.05);
+    --shadow-md: 0 2px 8px rgba(16, 24, 40, 0.08);
+    --shadow-lg: 0 4px 16px rgba(16, 24, 40, 0.10);
+    --shadow-focus: 0 0 0 3px rgba(30, 58, 138, 0.35);
+
+    /* ---------- Motion ---------- */
+    --transition-fast: 150ms ease;
+    --transition-base: 220ms ease;
+    --transition-slow: 300ms ease;
+
+    /* ---------- Layout ---------- */
+    --container-max: 1200px;
+    --header-height: 64px;
+}
+
+/* ---------- Respect reduced motion (accessibility) ---------- */
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* ---------- Base resets ---------- */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: var(--font-sans);
+    font-size: var(--fs-base);
+    line-height: var(--lh-normal);
+    color: var(--color-text-primary);
+    background: var(--color-bg);
+    -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+h4 {
+    font-family: var(--font-display);
+    color: var(--color-primary-dark);
+    line-height: var(--lh-tight);
+    margin: 0;
+}
+
+h1 {
+    font-size: var(--fs-4xl);
+    font-weight: var(--fw-bold);
+}
+
+h2 {
+    font-size: var(--fs-3xl);
+    font-weight: var(--fw-semibold);
+}
+
+h3 {
+    font-size: var(--fs-2xl);
+    font-weight: var(--fw-semibold);
+}
+
+h4 {
+    font-size: var(--fs-xl);
+    font-weight: var(--fw-medium);
+}
+
+p {
+    color: var(--color-text-secondary);
+    line-height: var(--lh-relaxed);
+    margin: 0;
+}
+
+/* ---------- Focus visibility (accessibility, WCAG 2.2 AA) ---------- */
+:focus-visible {
+    outline: none;
+    box-shadow: var(--shadow-focus);
+    border-radius: var(--radius-sm);
+}
+
+/* ---------- Reusable component classes ---------- */
+
+.card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-6);
+    box-shadow: var(--shadow-sm);
+    transition: box-shadow var(--transition-base), transform var(--transition-base);
+}
+
+.card:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-2px);
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-3) var(--space-5);
+    border-radius: var(--radius-md);
+    font-weight: var(--fw-medium);
+    font-size: var(--fs-sm);
+    border: none;
+    cursor: pointer;
+    transition: transform var(--transition-fast), background var(--transition-fast);
+}
+
+.btn:active {
+    transform: scale(0.97);
+}
+
+.btn-primary {
+    background: var(--color-primary);
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background: var(--color-primary-dark);
+}
+
+.btn-secondary {
+    background: var(--color-surface);
+    color: var(--color-primary);
+    border: 1px solid var(--color-border-strong);
+}
+
+.btn-secondary:hover {
+    background: var(--color-surface-alt);
+}
+
+/* ---------- SourceBadge statuses ---------- */
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
+    padding: 2px var(--space-3);
+    border-radius: var(--radius-full);
+    font-size: var(--fs-xs);
+    font-weight: var(--fw-semibold);
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+}
+
+.badge-verified {
+    background: var(--status-verified-bg);
+    color: var(--status-verified-text);
+}
+
+.badge-demo {
+    background: var(--status-demo-bg);
+    color: var(--status-demo-text);
+}
+
+.badge-needs-verification {
+    background: var(--status-needs-verification-bg);
+    color: var(--status-needs-verification-text);
+}
+
+.badge-not-available {
+    background: var(--status-not-available-bg);
+    color: var(--status-not-available-text);
+}
+
+/* ---------- Accordion (for question lists / phase details) ---------- */
+.accordion-item {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    margin-bottom: var(--space-2);
+}
+
+.accordion-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-4);
+    cursor: pointer;
+    background: var(--color-surface);
+    transition: background var(--transition-fast);
+}
+
+.accordion-header:hover {
+    background: var(--color-surface-alt);
+}
+
+.accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height var(--transition-slow) ease;
+    background: var(--color-surface-alt);
+    padding: 0 var(--space-4);
+}
+
+.accordion-content.open {
+    max-height: 500px;
+    /* adjust per content, or use JS-measured height */
+    padding: var(--space-4);
+}
+
+/* ---------- Devanagari script override (Hindi/Marathi content) ---------- */
+[lang="hi"],
+[lang="mr"] {
+    font-family: var(--font-devanagari);
+}
