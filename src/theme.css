@@ -300,3 +300,24 @@ p {
 [lang="mr"] {
     font-family: var(--font-devanagari);
 }
+
+/* ---------- Disclaimer Banner (softened, official-notice style) ---------- */
+.disclaimer-banner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    background: var(--color-primary-bg);
+    color: var(--color-primary-dark);
+    font-size: var(--fs-xs);
+    font-weight: var(--fw-medium);
+    padding: var(--space-2) var(--space-4);
+    border-bottom: 1px solid var(--color-border);
+    text-align: center;
+    line-height: var(--lh-normal);
+}
+
+.disclaimer-icon {
+    font-size: var(--fs-sm);
+    flex-shrink: 0;
+}

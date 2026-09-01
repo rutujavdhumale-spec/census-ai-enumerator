@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { LanguageProvider } from './i18n/LanguageContext';
 import { AccessibilityProvider } from './context/AccessibilityContext';
 import { AccessibilityBar } from './components/AccessibilityBar';
@@ -16,6 +16,15 @@ import { Bot } from 'lucide-react';
 
 export const AppContent: React.FC = () => {
   const [activeSection, setActiveSection] = useState<string>('hero');
+
+  useEffect(() => {
+    // Force scroll to top on initial page load, overriding any
+    // browser scroll restoration or lingering URL hash.
+    if ('scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual';
+    }
+    window.scrollTo(0, 0);
+  }, []);
 
   const handleNavigate = (sectionId: string) => {
     setActiveSection(sectionId);
